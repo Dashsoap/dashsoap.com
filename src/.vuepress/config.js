@@ -1,7 +1,7 @@
 // .vuepress/config.js
 
 module.exports = {
-    dest: 'docs',
+    dest: 'public',
     // 网站 Title
     title: '奔跑的肥皂',
 
