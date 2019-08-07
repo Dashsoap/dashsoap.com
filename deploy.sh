@@ -12,8 +12,6 @@ echo 'dashsoap.com' > CNAME
 git init
 git add -A
 git commit -m 'deploy'
-git config user.email "deploy@circleci.com"
-git config user.name "circleci"
 
 # 如果发布到 https://<USERNAME>.github.io
 # git push -f https://${token}@${address} master:master

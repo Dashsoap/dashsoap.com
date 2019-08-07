@@ -23,9 +23,9 @@ jobs:
 
       - run: echo "Install Vuepress"
 
-      - run: yarn build
+      - run: git config --global user.email "deploy@circleci.com"
 
-      - run: echo "Build Complete!"
+      - run: git config --global user.name "circleci"
 
       - run: yarn deploy
 
