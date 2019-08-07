@@ -30,3 +30,5 @@ https://github.com/meteorlxy/vuepress-theme-meteorlxy
 ```
 
 </details>
+
+<hello-world></hello-world>
