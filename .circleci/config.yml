@@ -19,6 +19,10 @@ jobs:
     steps:
       - checkout
 
+      - add_ssh_keys:
+          fingerprints:
+            - "61:de:11:cd:29:a6:9d:70:b1:f8:ad:bb:ba:3f:54:c1"
+
       - run: yarn global add vuepress vuepress-theme-meteorlxy
 
       - run: echo "Install Vuepress"
