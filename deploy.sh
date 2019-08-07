@@ -1,10 +1,10 @@
 # 确保脚本抛出遇到的错误
 set -e
 # 生成静态文件
-npm run docs:build --dest dist
+npm run build --dest dist
 
 # 进入生成的文件夹
-cd dist
+cd src/.vuepress/dist
 
 # 如果是发布到自定义域名
 echo 'dashsoap.com' > CNAME
