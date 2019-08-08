@@ -54,23 +54,12 @@ module.exports = {
                     link: 'https://github.com/dashsoap',
                 },
 
-                // // Facebook 帐号和链接
-                // facebook: {
-                //     account: 'meteorlxy.cn',
-                //     link: 'https://www.facebook.com/meteorlxy.cn',
-                // },
-
                 // // LinkedIn 帐号和链接
                 // linkedin: {
                 //     account: 'meteorlxy',
                 //     link: 'http://www.linkedin.com/in/meteorlxy',
                 // },
 
-                // // Twitter 帐号和链接
-                // twitter: {
-                //     account: 'meteorlxy_cn',
-                //     link: 'https://twitter.com/meteorlxy_cn',
-                // },
 
                 // 新浪微博 帐号和链接
                 weibo: {
@@ -84,53 +73,6 @@ module.exports = {
                     link: 'https://www.zhihu.com/people/zhou-jing-tian-56',
                 },
 
-                // // 豆瓣 帐号和链接
-                // douban: {
-                //     account: '159342708',
-                //     link: 'https://www.douban.com/people/159342708',
-                // },
-
-                // // Reddit 帐号和链接
-                // reddit: {
-                //     account: 'meteorlxy',
-                //     link: 'https://www.reddit.com/user/meteorlxy',
-                // },
-
-                // // Medium 帐号和链接
-                // medium: {
-                //     account: 'meteorlxy.cn',
-                //     link: 'https://medium.com/@meteorlxy.cn',
-                // },
-
-                // // Instagram 帐号和链接
-                // instagram: {
-                //     account: 'meteorlxy.cn',
-                //     link: 'https://www.instagram.com/meteorlxy.cn',
-                // },
-
-                // // GitLab 帐号和链接
-                // gitlab: {
-                //     account: 'meteorlxy',
-                //     link: 'https://gitlab.com/meteorlxy',
-                // },
-
-                // // Bitbucket 帐号和链接
-                // bitbucket: {
-                //     account: 'meteorlxy',
-                //     link: 'https://bitbucket.org/meteorlxy',
-                // },
-
-                // // Docker Hub 帐号和链接
-                // docker: {
-                //     account: 'meteorlxy',
-                //     link: 'https://hub.docker.com/u/meteorlxy',
-                // },
-
-                // // CSDN 帐号和链接
-                // csdn: {
-                //     account: '',
-                //     link: 'https://www.csdn.net/',
-                // },
 
                 // 掘金 帐号和链接
                 juejin: {
