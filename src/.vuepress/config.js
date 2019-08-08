@@ -159,8 +159,9 @@ module.exports = {
 
         // 评论配置，参考下方 [页面评论] 章节
         comments: {
+            platform: 'github',
             owner: 'Dashsoap',
-            repo: 'dashsoap.com',
+            repo: 'dashsoap.github.io',
             clientId: 'ab7d5e3f8e1d9e568757',
             clientSecret: 'bc5a3ab8674fe3ae7e91f60a7ad7a4d36a21bd01',
         },
