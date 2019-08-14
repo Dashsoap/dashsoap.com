@@ -25,6 +25,8 @@ jobs:
 
       - run: yarn global add vuepress vuepress-theme-meteorlxy
 
+      - run: yarn add vuepress-plugin-cat -S
+
       - run: echo "Install Vuepress"
 
       - run: git config --global user.email "360062589@qq.com"

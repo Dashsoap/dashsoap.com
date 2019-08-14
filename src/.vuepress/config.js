@@ -17,6 +17,9 @@ module.exports = {
     // 使用的主题
     theme: 'vuepress-theme-meteorlxy',
 
+    plugins: [
+        "vuepress-plugin-cat"
+    ],
     // 主题配置
     themeConfig: {
         // 主题语言，参考下方 [主题语言] 章节
