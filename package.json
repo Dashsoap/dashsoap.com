@@ -3,5 +3,8 @@
     "dev": "vuepress dev src",
     "build": "vuepress build src",
     "deploy": "bash deploy.sh"
+  },
+  "dependencies": {
+    "vuepress-plugin-cat": "^1.0.3"
   }
 }
