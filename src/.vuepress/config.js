@@ -40,7 +40,7 @@ module.exports = {
             location: 'BeiJing City, China',
 
             // 组织
-            organization: ' BeiJing Union University',
+            organization: ' Ymz Studio ',
 
             // 头像
             // 设置为外部链接
