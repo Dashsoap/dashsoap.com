@@ -25,6 +25,8 @@ jobs:
 
       - run: yarn global add vuepress vuepress-theme-meteorlxy
 
+      - run: yarn global -D @vuepress/plugin-google-analytics@next
+
       - run: npm install
 
       - run: echo "Install Vuepress"
