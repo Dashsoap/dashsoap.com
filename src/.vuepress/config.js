@@ -18,7 +18,10 @@ module.exports = {
     theme: 'vuepress-theme-meteorlxy',
 
     plugins: [
-        "vuepress-plugin-cat"
+        "vuepress-plugin-cat",
+        '@vuepress/google-analytics', {
+            'ga': '147310905'
+        }
     ],
     // 主题配置
     themeConfig: {
