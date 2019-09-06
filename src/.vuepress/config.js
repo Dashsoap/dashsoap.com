@@ -20,7 +20,7 @@ module.exports = {
     plugins: [
         "vuepress-plugin-cat",
         '@vuepress/google-analytics', {
-            'ga': '147310905'
+            'ga': 'UA-147310905-1'
         }
     ],
     // 主题配置
