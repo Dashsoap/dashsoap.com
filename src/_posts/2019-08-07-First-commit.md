@@ -1,6 +1,6 @@
 ---
 category: Web
-tag: -Web
+tags: -Web
 date: 2019-08-07
 title: Hello, world!
 vssue-title: Hello, world!

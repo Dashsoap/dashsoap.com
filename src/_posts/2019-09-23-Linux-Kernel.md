@@ -1,6 +1,6 @@
 ---
 category: 硬件
-tag: -嵌入式 
+tags: -嵌入式 
 -Driver 
 -Linux
 date: 2019-08-08
