@@ -1,6 +1,8 @@
 ---
 category: 硬件
-tag: -嵌入式 -Driver -Linux
+tag: -嵌入式 
+-Driver 
+-Linux
 date: 2019-08-08
 title: Linux Kernel 之 SPI NAND 驱动
 vssue-title: Linux Kernel 之 SPI NAND 驱动
