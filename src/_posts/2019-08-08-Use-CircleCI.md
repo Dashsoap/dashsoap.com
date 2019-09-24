@@ -1,8 +1,8 @@
 ---
-category: 前端
+category: Web
 tags: 
-  - Web 
-date: 2019-08-09
+  - CI
+date: 2019-01-21
 title: 使用CircleCI来持续集成你的静态网页
 vssue-title: 使用CircleCI来持续集成你的静态网页!
 ---
