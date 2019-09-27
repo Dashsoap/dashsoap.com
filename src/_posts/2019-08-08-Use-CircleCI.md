@@ -2,7 +2,7 @@
 category: Web
 tags: 
   - CI
-date: 2019-01-21
+date: 2019-08-08
 title: 使用CircleCI来持续集成你的静态网页
 vssue-title: 使用CircleCI来持续集成你的静态网页!
 ---
