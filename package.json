@@ -5,7 +5,9 @@
     "deploy": "bash deploy.sh"
   },
   "dependencies": {
+    "vuepress": "^1.4.0",
     "vuepress-plugin-cat": "^1.0.3",
+    "vuepress-theme-meteorlxy": "^1.8.0",
     "yarn": "^1.17.3"
   }
 }
