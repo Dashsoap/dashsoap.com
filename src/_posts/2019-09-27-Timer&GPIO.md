@@ -3,14 +3,23 @@ category: 硬件
 tags: 
     - Linux 
     - 驱动
-date: 2019-09-27
-title: Timer 和 GPIO 
-vssue-title: Timer 和 GPIO 
+date: 2020-04-08
+title: 什么是GPIO 
+vssue-title: 什么是GPIO 
 ---
 ## 开篇
 
-说实话，`Timer`和`GPIO` 不应该一起讲的，但是写的事实刚好就写到了PWM 而且弄明白了比较开心 我就先写上了。
+拖更了很久 近期更新 
 
-## Timer
+## GPIO可以干嘛
 
-Timer就是一个计时器，和SetTimerOut
+简而言之 GPIO的中文意思就是 通用的输入输出接口 提供上下拉电压，中断，输入输出。
+在GPIO上可以模拟I2C协议 UART协议 SPI协议 。虽然效率低 但是全能。
+
+## 为什么需要GPIO
+
+大多数情况下我们都是在低速的情况使用GPIO 给予电源开关 这些功能都是别的总线协议可以做到 但是又非常浪费资源 GPIO简单方便~
+
+## GPIO有多少寄存器？
+
+GPIO的寄存器不多 主要是配置上下拉 输入输出 在编写驱动的时候用户只需要给予GPIO编号即可操作。
