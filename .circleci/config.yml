@@ -27,7 +27,7 @@ jobs:
 
       - run: yarn add -D @vuepress/plugin-google-analytics@next
 
-      - run: npm install
+      - run: npm ci
 
       - run: echo "Install Vuepress"
 
