@@ -5,7 +5,7 @@ module.exports = {
     title: '奔跑的肥皂',
 
     // 网站描述
-    description: 'This is my blog',
+    description: '皂酱的博客',
 
     // 网站语言
     locales: {
@@ -102,7 +102,8 @@ module.exports = {
         // 顶部导航栏内容
         nav: [
             { text: '首页', link: '/', exact: true },
-            { text: '日记', link: '/posts/', exact: false },
+            { text: '分类', link: '/posts/', exact: true },
+            { text: '笔记', link: '/posts/tags/笔记.html', exact: true}
         ],
 
         // 评论配置，参考下方 [页面评论] 章节
