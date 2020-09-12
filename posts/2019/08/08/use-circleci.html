@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>使用CircleCI来持续集成你的静态网页 | 奔跑的肥皂</title>
+    <meta name="description" content="皂酱的博客">
+    <meta name="generator" content="VuePress 1.4.0">
+    <link rel="preload" href="/assets/css/0.styles.c20129d3.css" as="style"><link rel="preload" href="/assets/js/app.9ea91732.js" as="script"><link rel="preload" href="/assets/js/7.0a979057.js" as="script"><link rel="preload" href="/assets/js/16.a1d0bafb.js" as="script"><link rel="prefetch" href="/assets/js/1.c2747b0a.js"><link rel="prefetch" href="/assets/js/10.13fffc3d.js"><link rel="prefetch" href="/assets/js/11.5d16d5be.js"><link rel="prefetch" href="/assets/js/12.4145bfe2.js"><link rel="prefetch" href="/assets/js/13.13c15ee5.js"><link rel="prefetch" href="/assets/js/14.fa2bfcc9.js"><link rel="prefetch" href="/assets/js/15.2a8f6e70.js"><link rel="prefetch" href="/assets/js/17.998e02b6.js"><link rel="prefetch" href="/assets/js/18.2e906461.js"><link rel="prefetch" href="/assets/js/19.f1990469.js"><link rel="prefetch" href="/assets/js/20.5a7030ad.js"><link rel="prefetch" href="/assets/js/21.dd6312be.js"><link rel="prefetch" href="/assets/js/22.4e87b1ce.js"><link rel="prefetch" href="/assets/js/23.2836341c.js"><link rel="prefetch" href="/assets/js/24.a382e0f0.js"><link rel="prefetch" href="/assets/js/25.cf22e919.js"><link rel="prefetch" href="/assets/js/26.9befbd89.js"><link rel="prefetch" href="/assets/js/3.7c94b098.js"><link rel="prefetch" href="/assets/js/4.972c91a4.js"><link rel="prefetch" href="/assets/js/5.6a34f9d8.js"><link rel="prefetch" href="/assets/js/6.4c2a275d.js"><link rel="prefetch" href="/assets/js/8.2a39107d.js"><link rel="prefetch" href="/assets/js/9.b4f27c23.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.c20129d3.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-meteorlxy"><header class="header" data-v-7a046aea><div data-v-e4145d0a data-v-7a046aea><nav class="navbar" data-v-e4145d0a><div class="container" data-v-e4145d0a><a href="/" class="router-link-active" data-v-e4145d0a><span class="navbar-site-name" data-v-e4145d0a>
+          奔跑的肥皂
+        </span></a> <div class="navbar-toggler" data-v-e4145d0a><svg class="icon" style="font-size:1.2em;" data-v-e4145d0a data-v-e4145d0a><title data-v-e4145d0a data-v-e4145d0a>menu</title><use xlink:href="#icon-menu" data-v-e4145d0a data-v-e4145d0a></use></svg></div> <div class="navbar-links" data-v-e4145d0a><a href="/" class="navbar-link" data-v-e4145d0a>
+            首页
+          </a><a href="/posts/" class="navbar-link" data-v-e4145d0a>
+            分类
+          </a><a href="/posts/tags/笔记.html" class="navbar-link" data-v-e4145d0a>
+            笔记
+          </a></div></div></nav> <div class="navbar-holder" style="display:none;" data-v-e4145d0a></div></div> <div class="banner" data-v-98d6aa8c data-v-7a046aea data-v-7a046aea><div class="container" data-v-98d6aa8c><div class="center" data-v-98d6aa8c><h1 data-v-98d6aa8c data-v-7a046aea>
+          使用CircleCI来持续集成你的静态网页
+        </h1></div></div></div></header> <div class="container clearfix show-aside" data-v-4dd605a1 data-v-4dd605a1><main class="main" data-v-4dd605a1><div class="post" data-v-4dd605a1 data-v-4dd605a1><section class="post-meta main-div" data-v-4e23451f><section class="post-date clearfix" data-v-4e23451f><span class="create-date" data-v-4e23451f>
+      发布时间 : 2019-08-08
+    </span> <span class="update-date" data-v-4e23451f>
+      最后修改 : Invalid Date
+    </span></section> <section class="post-links" data-v-4e23451f><a href="/posts/2019/08/08/linux-kernel.html" class="post-link" data-v-4e23451f>
+      上一篇 : Linux Kernel 驱动 之 PWM
+    </a> <a href="/posts/2020/04/08/timer-gpio.html" class="post-link" data-v-4e23451f>
+      下一篇 : 什么是GPIO
+    </a></section></section> <article class="main-div"><div class="post-content content content__default"><p>在使用自己的域名来访问 Github Page 上踩坑了 顺便一起分享一下</p> <h2 id="缘起"><a href="#缘起" class="header-anchor">#</a> 缘起</h2> <p>最近一直想弄一个自己的博客，来记录自己在前端道路上的学习</p> <p>无奈技术有限，接触时间也不长，再加之有点点贪玩，就一直搁置</p> <p>感觉自己的情况应该是有普遍性，也想替后来的同学淌过这些坑，所以只考虑了能 SSR 的方法</p> <p>于是我有且仅有的一个技术站 <code>Vue</code> 不能用了</p> <p>然后就考虑的<code>NUXT</code> + <code>KOA2</code> 但是自己开发费事 就想用 github pages</p> <p>在看文档的时候偶然发现了 <a href="https://vuepress.vuejs.org/zh/" target="_blank" rel="noopener noreferrer">VuePress<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 这个项目</p> <p>发现，哇塞，真好看，我好喜欢这种风格，最后又发现能自定义主题，简直<code>完美</code></p> <p>最后使用了<a href="https://github.com/meteorlxy/vuepress-theme-meteorlxy" target="_blank" rel="noopener noreferrer">meteorlxy<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>老哥的主题 还真挺好看的</p> <p>那么接来下</p> <h2 id="开撸"><a href="#开撸" class="header-anchor">#</a> 开撸</h2> <h3 id="安装主题"><a href="#安装主题" class="header-anchor">#</a> 安装主题</h3> <p>创建一个新的项目 <code>my-blog</code> ：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token function">mkdir</span> my-blog
+<span class="token builtin class-name">cd</span> my-blog
+</code></pre></div><p>安装 <code>vuepress</code> 和 <code>vuepress-theme-meteorlxy</code>：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token function">npm</span> <span class="token function">install</span> vuepress vuepress-theme-meteorlxy
+</code></pre></div><p>创建 <code>src/_posts</code> 文件夹和 Vuepress 配置文件，项目结构大致为：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>my-blog
+├── src <span class="token comment"># Blog 源文件目录</span>
+│   ├── .vuepress <span class="token comment"># Vuepress 目录</span>
+│   │   └── config.js <span class="token comment"># Vuepress 配置文件</span>
+│   └── _posts <span class="token comment"># 博客文件夹</span>
+│       ├── xxx.md
+│       <span class="token punctuation">..</span>.
+└── package.json
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>注意，<code>src/index.md</code> 或 <code>src/README.md</code> 不是必须的，这个主题会自动为你加上首页。</p></div> <p>在 <code>package.json</code> 加入 <code>script</code> 字段：</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;dev&quot;</span><span class="token operator">:</span> <span class="token string">&quot;vuepress dev src&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;build&quot;</span><span class="token operator">:</span> <span class="token string">&quot;vuepress build src&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="配置主题"><a href="#配置主题" class="header-anchor">#</a> 配置主题</h3> <p>在 <code>src/.vuepress/config.js</code> 中配置 Vuepress 和主题：</p> <details><summary>点击展开config.js</summary> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// .vuepress/config.js</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 网站 Title</span>
+  title<span class="token operator">:</span> <span class="token string">&quot;奔跑的肥皂&quot;</span><span class="token punctuation">,</span>
+  <span class="token comment">// 网站描述</span>
+  description<span class="token operator">:</span> <span class="token string">&quot;This is my blog&quot;</span><span class="token punctuation">,</span>
+  <span class="token comment">// 网站语言</span>
+  locales<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token string">&quot;/&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      lang<span class="token operator">:</span> <span class="token string">&quot;zh-CN&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// 使用的主题</span>
+  theme<span class="token operator">:</span> <span class="token string">&quot;vuepress-theme-meteorlxy&quot;</span><span class="token punctuation">,</span>
+  <span class="token comment">// 主题配置</span>
+  themeConfig<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 主题语言，参考下方 [主题语言] 章节</span>
+    lang<span class="token operator">:</span> <span class="token string">&quot;zh-CN&quot;</span><span class="token punctuation">,</span>
+    <span class="token comment">// 个人信息（没有或不想设置的，删掉对应字段即可）</span>
+    personalInfo<span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 昵称</span>
+      nickname<span class="token operator">:</span> <span class="token string">&quot;dashsoap&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">// 个人简介</span>
+      description<span class="token operator">:</span> <span class="token string">&quot;练习时长快一年的前端练习生&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">// 电子邮箱</span>
+      email<span class="token operator">:</span> <span class="token string">&quot;dashsoap1997@gmail.com&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">// 所在地</span>
+      location<span class="token operator">:</span> <span class="token string">&quot;BeiJing City, China&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">// 组织</span>
+      organization<span class="token operator">:</span> <span class="token string">&quot; BeiJing Union University&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">// 头像</span>
+      <span class="token comment">// 设置为外部链接</span>
+      avatar<span class="token operator">:</span> <span class="token string">&quot;https://www.meteorlxy.cn/assets/img/avatar.jpg&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">// 或者放置在 .vuepress/public 文件夹，例如 .vuepress/public/img/avatar.jpg</span>
+      <span class="token comment">// avatar: '/img/avatar.jpg',</span>
+      <span class="token comment">// 社交平台帐号信息</span>
+      sns<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Github 帐号和链接</span>
+        github<span class="token operator">:</span> <span class="token punctuation">{</span>
+          account<span class="token operator">:</span> <span class="token string">&quot;dashsoap&quot;</span><span class="token punctuation">,</span>
+          link<span class="token operator">:</span> <span class="token string">&quot;https://github.com/dashsoap&quot;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token comment">// // LinkedIn 帐号和链接</span>
+        <span class="token comment">// linkedin: {</span>
+        <span class="token comment">//     account: 'meteorlxy',</span>
+        <span class="token comment">//     link: 'http://www.linkedin.com/in/meteorlxy',</span>
+        <span class="token comment">// },</span>
+        <span class="token comment">// 新浪微博 帐号和链接</span>
+        weibo<span class="token operator">:</span> <span class="token punctuation">{</span>
+          account<span class="token operator">:</span> <span class="token string">&quot;@皂皂呢&quot;</span><span class="token punctuation">,</span>
+          link<span class="token operator">:</span> <span class="token string">&quot;https://weibo.com/u/3962389632&quot;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token comment">// 知乎 帐号和链接</span>
+        zhihu<span class="token operator">:</span> <span class="token punctuation">{</span>
+          account<span class="token operator">:</span> <span class="token string">&quot;奔跑的肥皂&quot;</span><span class="token punctuation">,</span>
+          link<span class="token operator">:</span> <span class="token string">&quot;https://www.zhihu.com/people/zhou-jing-tian-56&quot;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token comment">// 掘金 帐号和链接</span>
+        juejin<span class="token operator">:</span> <span class="token punctuation">{</span>
+          account<span class="token operator">:</span> <span class="token string">&quot;Dashsoap&quot;</span><span class="token punctuation">,</span>
+          link<span class="token operator">:</span> <span class="token string">&quot;https://juejin.im/user/5c2596046fb9a049f3622ab3&quot;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">// 上方 header 的相关设置</span>
+    header<span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token comment">// header 的背景，可以使用图片，或者随机变化的图案（geopattern）</span>
+      background<span class="token operator">:</span> <span class="token punctuation">{</span>
+        useGeo<span class="token operator">:</span> <span class="token boolean">true</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token comment">// 是否在 header 显示标题</span>
+      showTitle<span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">// 是否显示文章的最近更新时间</span>
+    lastUpdated<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token comment">// 顶部导航栏内容</span>
+    nav<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span> text<span class="token operator">:</span> <span class="token string">&quot;首页&quot;</span><span class="token punctuation">,</span> link<span class="token operator">:</span> <span class="token string">&quot;/&quot;</span><span class="token punctuation">,</span> exact<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> text<span class="token operator">:</span> <span class="token string">&quot;日记&quot;</span><span class="token punctuation">,</span> link<span class="token operator">:</span> <span class="token string">&quot;/posts/&quot;</span><span class="token punctuation">,</span> exact<span class="token operator">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token comment">// 评论配置，参考下方 [页面评论] 章节</span>
+    comments<span class="token operator">:</span> <span class="token punctuation">{</span>
+      platform<span class="token operator">:</span> <span class="token string">&quot;github&quot;</span><span class="token punctuation">,</span>
+      owner<span class="token operator">:</span> <span class="token string">&quot;Dashsoap&quot;</span><span class="token punctuation">,</span>
+      repo<span class="token operator">:</span> <span class="token string">&quot;dashsoap.github.io&quot;</span><span class="token punctuation">,</span>
+      clientId<span class="token operator">:</span> <span class="token string">&quot;ab7d5e3f8e1d9e568757&quot;</span><span class="token punctuation">,</span>
+      clientSecret<span class="token operator">:</span> <span class="token string">&quot;bc5a3ab8674fe3ae7e91f60a7ad7a4d36a21bd01&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">// 分页配置</span>
+    pagination<span class="token operator">:</span> <span class="token punctuation">{</span>
+      perPage<span class="token operator">:</span> <span class="token number">5</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">// 默认页面（可选，默认全为 true）</span>
+    defaultPages<span class="token operator">:</span> <span class="token punctuation">{</span>
+      home<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      posts<span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div></details> <p>直到这里 我们的博客已经搭建得差不多了</p> <h3 id="开始写博客"><a href="#开始写博客" class="header-anchor">#</a> 开始写博客</h3> <p>创建你的第一篇博文：</p> <div class="language-md extra-class"><pre class="language-md"><code><span class="token comment">&lt;!-- _posts/2019-01-21-hello-world.md --&gt;</span>
+<span class="token hr punctuation">---</span>
+category: hello
+tags:
+<span class="token list punctuation">-</span> world
+  date: 2019-01-21
+  title: Hello, world!
+  vssue-title: Hello, world!
+<span class="token hr punctuation">---</span>
+这是第一篇博文。
+more 上面的内容是摘要，将显示在目录中。
+<span class="token comment">&lt;!-- more --&gt;</span>
+more 下面的内容只有浏览这篇文章时才会完全展示，不会显示在目录中。
+</code></pre></div><p>运行相应 <code>script</code> 生成你的博客网站：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 开发</span>
+<span class="token function">yarn</span> dev
+<span class="token comment"># 构建</span>
+<span class="token function">yarn</span> build
+</code></pre></div><p>一直到这里 我们可以运行一下 <code>yarn dev</code> 来看看效果了</p> <p>接下来我们就要把我们的代码推到 <code>{username}.github.io</code> 这个仓库去</p> <p><code>git push git@github.com:{username}/{username}.github.io.git dev</code></p> <p>解释一下 为什么推到 dev 分支，因为我们编译出来的 index.html 必须放到 master 的根目录</p> <p>又不想和自己的开发文件混在一起，就只能这么操作</p> <p>然后我们在根目录下 创建一个如下的 <code>deploy.sh</code> 文件</p> <div class="language-sh extra-class"><pre class="language-sh"><code>
+<span class="token comment"># 确保脚本抛出遇到的错误</span>
+<span class="token builtin class-name">set</span> -e
+<span class="token comment"># 生成静态文件</span>
+<span class="token function">npm</span> run build --dest dist
+<span class="token comment"># 进入生成的文件夹</span>
+<span class="token builtin class-name">cd</span> src/.vuepress/dist
+<span class="token comment"># 如果是发布到自定义域名</span>
+<span class="token builtin class-name">echo</span> <span class="token string">'dashsoap.com'</span> <span class="token operator">&gt;</span> CNAME
+<span class="token function">git</span> init
+<span class="token function">git</span> <span class="token function">add</span> -A
+<span class="token function">git</span> commit -m <span class="token string">'deploy'</span>
+<span class="token comment"># 如果发布到 https://&lt;USERNAME&gt;.github.io</span>
+<span class="token comment"># git push -f https://${token}@${address} master:master</span>
+<span class="token function">git</span> push -f git@github.com:<span class="token punctuation">{</span>username<span class="token punctuation">}</span>/<span class="token punctuation">{</span>username<span class="token punctuation">}</span>.github.io.git master
+<span class="token comment"># 如果发布到 https://&lt;USERNAME&gt;.github.io/&lt;REPO&gt;</span>
+<span class="token comment"># git push -f git@github.com:&lt;USERNAME&gt;/&lt;REPO&gt;.git master:gh-pages</span>
+<span class="token builtin class-name">cd</span> -
+</code></pre></div><p>然后启动 <code>sh deploy.sh</code></p> <p>我们就能在{username}.github.io 这个网址下看到自己的博客啦~~</p></div></article> <section class="post-meta main-div" data-v-4e23451f><section class="post-date clearfix" data-v-4e23451f><span class="create-date" data-v-4e23451f>
+      发布时间 : 2019-08-08
+    </span> <span class="update-date" data-v-4e23451f>
+      最后修改 : Invalid Date
+    </span></section> <section class="post-links" data-v-4e23451f><a href="/posts/2019/08/08/linux-kernel.html" class="post-link" data-v-4e23451f>
+      上一篇 : Linux Kernel 驱动 之 PWM
+    </a> <a href="/posts/2020/04/08/timer-gpio.html" class="post-link" data-v-4e23451f>
+      下一篇 : 什么是GPIO
+    </a></section></section> <div id="post-comments" class="main-div"><!----></div></div></main> <aside class="aside" data-v-4dd605a1><div class="info-card main-div" data-v-9d847660 data-v-4dd605a1><div class="info-card-header" data-v-9d847660><img src="https://www.meteorlxy.cn/assets/img/avatar.jpg" alt="dashsoap" class="info-avatar" data-v-9d847660></div> <div class="info-card-body" data-v-9d847660><section class="info-nickname" data-v-9d847660>
+      dashsoap
+    </section> <section class="info-desc" data-v-9d847660>练习时长快一年的前端练习生</section> <section class="info-contact" data-v-9d847660><section data-v-9d847660><span title="BeiJing City, China" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>BeiJing City, China</title><use xlink:href="#icon-location" data-v-9d847660 data-v-9d847660></use></svg><span class="info-text" data-v-9d847660 data-v-9d847660>
+          BeiJing City, China
+        </span></span></section> <section data-v-9d847660><span title=" Ymz Studio " data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660> Ymz Studio </title><use xlink:href="#icon-organization" data-v-9d847660 data-v-9d847660></use></svg><span class="info-text" data-v-9d847660 data-v-9d847660>
+           Ymz Studio 
+        </span></span></section> <section data-v-9d847660><a href="mailto:dashsoap1997@gmail.com" title="dashsoap1997@gmail.com" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>dashsoap1997@gmail.com</title><use xlink:href="#icon-email" data-v-9d847660 data-v-9d847660></use></svg><span class="info-text" data-v-9d847660 data-v-9d847660>
+          dashsoap1997@gmail.com
+        </span></a></section></section></div> <div class="info-card-footer" data-v-9d847660><section class="info-sns clearfix" data-v-9d847660><a href="https://github.com/dashsoap" target="_blank" class="sns-link" data-v-9d847660><span title="GitHub: dashsoap" class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>GitHub: dashsoap</title><use xlink:href="#icon-github" data-v-9d847660 data-v-9d847660></use></svg></span></a><a href="https://weibo.com/u/3962389632" target="_blank" class="sns-link" data-v-9d847660><span title="新浪微博: @皂皂呢" class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>新浪微博: @皂皂呢</title><use xlink:href="#icon-weibo" data-v-9d847660 data-v-9d847660></use></svg></span></a><a href="https://www.zhihu.com/people/zhou-jing-tian-56" target="_blank" class="sns-link" data-v-9d847660><span title="知乎: 奔跑的肥皂" class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>知乎: 奔跑的肥皂</title><use xlink:href="#icon-zhihu" data-v-9d847660 data-v-9d847660></use></svg></span></a><a href="https://juejin.im/user/5c2596046fb9a049f3622ab3" target="_blank" class="sns-link" data-v-9d847660><span title="掘金: Dashsoap" class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>掘金: Dashsoap</title><use xlink:href="#icon-juejin" data-v-9d847660 data-v-9d847660></use></svg></span></a></section></div></div> <div class="post-nav-card main-div" style="position:relative;top:0;width:0px;" data-v-4dd605a1><div class="post-nav-contents"><svg class="icon"><title>book</title><use xlink:href="#icon-book"></use></svg> <span>文章目录</span> <div class="post-nav-toc"><ul><li><a href="/posts/2019/08/08/use-circleci.html#缘起">缘起</a></li><li><a href="/posts/2019/08/08/use-circleci.html#开撸">开撸</a><ul><li><a href="/posts/2019/08/08/use-circleci.html#安装主题">安装主题</a></li><li><a href="/posts/2019/08/08/use-circleci.html#配置主题">配置主题</a></li><li><a href="/posts/2019/08/08/use-circleci.html#开始写博客">开始写博客</a></li></ul></li></ul></div></div> <div class="post-nav-comments"><svg class="icon"><title>comment</title><use xlink:href="#icon-comment"></use></svg> <a href="/posts/2019/08/08/use-circleci.html#post-comments">
+      评论
+    </a></div></div></aside></div> <footer class="footer" data-v-1375e54c><p class="footer-sns-links" data-v-1375e54c><a href="https://github.com/dashsoap" target="_blank" class="sns-link" data-v-1375e54c><span title="GitHub: dashsoap" class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>GitHub: dashsoap</title><use xlink:href="#icon-github" data-v-1375e54c data-v-1375e54c></use></svg></span></a><a href="https://weibo.com/u/3962389632" target="_blank" class="sns-link" data-v-1375e54c><span title="新浪微博: @皂皂呢" class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>新浪微博: @皂皂呢</title><use xlink:href="#icon-weibo" data-v-1375e54c data-v-1375e54c></use></svg></span></a><a href="https://www.zhihu.com/people/zhou-jing-tian-56" target="_blank" class="sns-link" data-v-1375e54c><span title="知乎: 奔跑的肥皂" class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>知乎: 奔跑的肥皂</title><use xlink:href="#icon-zhihu" data-v-1375e54c data-v-1375e54c></use></svg></span></a><a href="https://juejin.im/user/5c2596046fb9a049f3622ab3" target="_blank" class="sns-link" data-v-1375e54c><span title="掘金: Dashsoap" class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>掘金: Dashsoap</title><use xlink:href="#icon-juejin" data-v-1375e54c data-v-1375e54c></use></svg></span></a></p> <p class="footer-text" data-v-1375e54c><span data-v-1375e54c>Powered by </span> <a href="https://github.com/vuejs/vuepress" target="_blank" data-v-1375e54c>
+      VuePress
+    </a> <span data-v-1375e54c> | </span> <a href="https://github.com/meteorlxy/vuepress-theme-meteorlxy" target="_blank" data-v-1375e54c>
+        meteorlxy
+      </a></p> <!----></footer></div><div class="global-ui"><!----><!----><div class="cat-container" data-v-a13867c0><canvas id="vuepress-cat" width="280" height="250" class="live2d" data-v-a13867c0></canvas></div></div></div>
+    <script src="/assets/js/app.9ea91732.js" defer></script><script src="/assets/js/7.0a979057.js" defer></script><script src="/assets/js/16.a1d0bafb.js" defer></script>
+  </body>
+</html>
